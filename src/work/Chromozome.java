@@ -1,12 +1,10 @@
 package work;
 
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 public class Chromozome {
 	private Gene[] chromozome = new Gene[Search.dimension_x + Search.dimension_y];
 	private int fitness = 0;
-	private Map map = new Map();
+	public Map map = new Map();
 	
 	/**
 	 * constructor generating random array of genes*/
@@ -15,10 +13,8 @@ public class Chromozome {
 			chromozome[i] = Gene.generateGene();
 		}
 		
-		Iterator<Entry<Integer, Integer>> iterator = Search.stones.entrySet().iterator();
-		while( iterator.hasNext() ){
-		     Entry<Integer, Integer> entry = iterator.next();
-		    	map.setStone(entry.getKey(),entry.getValue());
+		for(int i=0; i<Search.stones_count; i++){
+			map.setStone(Search.stones.get(i).key(), Search.stones.get(i).value());
 		}
 	}
 	
@@ -34,11 +30,16 @@ public class Chromozome {
 		return this.map;
 	}
 	
+	public void setMap(Map map){
+		this.map = map;
+	}
+	
+	/**
+	 * function to print chromozome*/
 	public void printChromozome(){
 		for(int i=0; i<chromozome.length; i++){
 			System.out.println(chromozome[i].toString());
 		}
 		System.out.println();
-		this.map.printMap();
 	}
 }

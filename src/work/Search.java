@@ -1,13 +1,14 @@
 package work;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Search {
 	public static int dimension_y = 0;
 	public static int dimension_x = 0;
 	public static int stones_count;
-	public static LinkedHashMap<Integer,Integer> stones = new LinkedHashMap<Integer,Integer>();
+	public static ArrayList<Pair> stones = new ArrayList<Pair>();
+	public static ArrayList<Chromozome> generation = new ArrayList<Chromozome>();
 	
 	public static void main(String[] args) {	
 		Scanner input = new Scanner(System.in);
@@ -58,12 +59,15 @@ public class Search {
 			System.out.println("Zadaj súradnice kameòa " + (i+1));
 			y = input.nextInt();
 			x = input.nextInt();
-			stones.put(y, x);
+			stones.add(new Pair(y,x));
 		}
 		input.close();	
 		
-		Chromozome ch = new Chromozome();
-		ch.printChromozome();
-		
+		/**
+		 * generate random Chromozomes for initial generation*/
+		for(int i=0; i<1; i++){
+			Chromozome ch = new Chromozome();
+			Map map = ch.getMap().rakeMap(ch);
+		}
 	}
 }
