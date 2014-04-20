@@ -47,31 +47,11 @@ public class Map {
 		Map map = ch.getMap();
 		Gene[] chromozome = ch.getChromozome(); 
 		for(int i=0; i<chromozome.length; i++){
-			System.out.println(chromozome[i].toString());
-			map = this.singleRake(chromozome[i], map);
+			map = Map.makeMove(map, chromozome[i].getX(), chromozome[i].getY(), chromozome[i].getOrientation());
 			if(map == null)
 				break;
-			printMap(map);
-			System.out.println();
 		}
 		
-		return map;
-	}
-	
-	/**
-	 * make single rake on the map*/
-	public Map singleRake(Gene gene, Map map){	
-		/*if(!map.getMap()[gene.getY()][gene.getX()].equals("0")){
-			if(count == Search.dimension_x + Search.dimension_y)
-				return null;
-			else return map;
-		}
-		else{*/
-			map = Map.makeMove(map, gene.getX(), gene.getY(), gene.getOrientation());
-
-				if(map == null)
-					System.out.println("MAPA JE NULL");
-	//	}
 		return map;
 	}
 	
@@ -209,6 +189,27 @@ public class Map {
 			return map;
 		}
 		return null;
+	}
+	
+	/**
+	 * function to compute fitness*/
+	public static int computeFitness(Chromozome ch){
+		Map map = ch.getMap();
+		int fitness = 0;
+		if(map != null){
+			/**
+			 * count number of raked boxes*/
+			for(int i=0; i<Search.dimension_y; i++){
+				for(int j=0; j<Search.dimension_x; j++){
+					if(!map.array[i][j].equals("K")){
+						if(Integer.parseInt(map.array[i][j]) > 0){
+							fitness++;
+						}
+					}
+				}
+			}
+		}
+		return fitness;
 	}
 	
 }
