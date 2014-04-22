@@ -21,7 +21,7 @@ public class Search {
 	
 	public static void main(String[] args) {	
 		Scanner input = new Scanner(System.in);
-		int generation_number = 0;
+		int generation_number = 1;
 
 		/**
 		 * loading dimension x*/
@@ -85,7 +85,7 @@ public class Search {
 		/**
 		 * generation period which will repeat max 10 000 times*/
 		while(generation_number < 50000){
-			generation_number++;
+			System.out.println("Generation: " +generation_number);
 			
 			/**
 			 * rake map and compute choromozome fitness*/
@@ -161,10 +161,12 @@ public class Search {
 			parrents.clear();
 			
 			if(sorted_generation.get(0).fitness == (dimension_x*dimension_y - stones_count)){
-				System.out.println("Solution found!  Generation: " +generation_number);
+				System.out.println("Solution found in generation: " +generation_number);
 				Map.printMap(sorted_generation.get(0).chromozome.getMap());
 				break;
 			}
+			
+			generation_number++;
 		}
 	}
 }
